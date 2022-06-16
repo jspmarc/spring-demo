@@ -8,7 +8,17 @@ public class UserResponse extends CommonModel {
 
     private static final long serialVersionUID = 1L;
     private String name;
+
+    private String id;
     private long githubId;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public long getGithubId() {
         return githubId;
@@ -30,6 +40,7 @@ public class UserResponse extends CommonModel {
     public String toString() {
         return "UserResponse{" +
                 "name='" + name + '\'' +
+                ", id='" + id + '\'' +
                 ", githubId=" + githubId +
                 '}';
     }

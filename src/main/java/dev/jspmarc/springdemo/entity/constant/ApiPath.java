@@ -6,4 +6,6 @@ public interface ApiPath {
     String BASE_TEST_PATH = BASE_PATH + "/test";
     String BASE_USER_PATH = BASE_PATH + "/users";
     String ROOT = "/";
+
+    String GITHUB_USERS = "/users";
 }

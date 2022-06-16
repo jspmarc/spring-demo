@@ -34,9 +34,21 @@
         </dependency>
 
         <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>converter-jackson</artifactId>
+            <version>${retrofit.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.tiket.tix.common</groupId>
             <artifactId>rest-web-model</artifactId>
             <version>${tix.common.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.reactivex.rxjava2</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>${rx.java.version}</version>
         </dependency>
     </dependencies>
 
@@ -53,6 +65,7 @@
     <properties>
         <java.version>1.8</java.version>
         <retrofit.version>2.7.1</retrofit.version>
+        <rx.java.version>2.1.7</rx.java.version>
         <spring.boot.version>1.5.8.RELEASE</spring.boot.version>
         <tix.common.version>1.3.0</tix.common.version>
     </properties>

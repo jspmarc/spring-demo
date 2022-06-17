@@ -1,21 +1,48 @@
 package dev.jspmarc.springdemo.rest.web.controller;
 
+import com.tiket.tix.common.rest.web.model.response.BaseResponse;
+import com.tiket.tix.common.rest.web.model.response.CommonResponse;
+import com.tiket.tix.hotel.common.model.enums.ResponseCode;
 import dev.jspmarc.springdemo.entity.constant.ApiPath;
+import dev.jspmarc.springdemo.entity.dao.Favorite;
+import dev.jspmarc.springdemo.rest.web.model.request.FavoriteRequest;
+import dev.jspmarc.springdemo.service.api.FavoriteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.async.DeferredResult;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(ApiPath.BASE_FAVORITE_PATH)
 public class FavoriteController {
 
-    @GetMapping(ApiPath.ROOT)
-    public String[] getFavorites() {
-        return new String[]{"A"};
+    private final FavoriteService favoriteService;
+
+    @Autowired
+    public FavoriteController(FavoriteService favoriteService) {
+        this.favoriteService = favoriteService;
     }
 
-    @PostMapping(ApiPath.ROOT)
+    @GetMapping
+    public DeferredResult<BaseResponse<List<Favorite>>> getFavorites() {
+        DeferredResult<BaseResponse<List<Favorite>>> result = new DeferredResult<>();
+        favoriteService
+                .getAll()
+                .map(favorites -> CommonResponse.constructResponse(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getMessage(), null, favorites))
+                .subscribe(result::setResult, result::setErrorResult);
+        return result;
+    }
+
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public String favoritesUser(@RequestBody String name) {
-        return name;
+    public DeferredResult<BaseResponse<Favorite>> favoritesUser(@RequestBody FavoriteRequest req) {
+        DeferredResult<BaseResponse<Favorite>> result = new DeferredResult<>();
+        favoriteService
+                .addToFavorite(req)
+                .map(f -> CommonResponse.constructResponse(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getMessage(), null, f))
+                .subscribe(result::setResult, result::setErrorResult);
+        return result;
     }
 }

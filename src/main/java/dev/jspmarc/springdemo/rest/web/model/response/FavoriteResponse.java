@@ -4,7 +4,7 @@ import com.tiket.tix.common.entity.CommonModel;
 import lombok.Data;
 
 @Data
-public class UserResponse extends CommonModel {
+public class FavoriteResponse extends CommonModel {
     private String id;
     private int gitHubId;
     private String gitHubLogin;

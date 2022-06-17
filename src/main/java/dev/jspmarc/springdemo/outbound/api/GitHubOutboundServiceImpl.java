@@ -1,6 +1,8 @@
 package dev.jspmarc.springdemo.outbound.api;
 
 import dev.jspmarc.springdemo.entity.dao.GitHubUser;
+import dev.jspmarc.springdemo.libraries.mapper.GitHubUserMapper;
+import dev.jspmarc.springdemo.rest.web.model.response.GitHubUserResponse;
 import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import retrofit2.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class GitHubOutboundServiceImpl implements GitHubOutboundService {
@@ -23,12 +26,22 @@ public class GitHubOutboundServiceImpl implements GitHubOutboundService {
     }
 
     @Override
-    public Single<List<GitHubUser>> getRandomUsers(int since) {
-        return Single.<List<GitHubUser>>create(singleEmitter -> {
+    public Single<List<GitHubUserResponse>> getRandomUsers(int since) {
+        return Single.<List<GitHubUserResponse>>create(singleEmitter -> {
                     try {
                         Response<List<GitHubUser>> response = endpointService.getUsers(since).execute();
                         if (response.isSuccessful()) {
-                            singleEmitter.onSuccess(response.body());
+                            List<GitHubUserResponse> res;
+                            if (response.body() != null) {
+                                res = response
+                                        .body()
+                                        .stream()
+                                        .map(GitHubUserMapper::toGitHubUserResponse)
+                                        .collect(Collectors.toList());
+                            } else {
+                                res = new ArrayList<>();
+                            }
+                            singleEmitter.onSuccess(res);
                             return;
                         }
                         if (Objects.nonNull(response.errorBody())) {

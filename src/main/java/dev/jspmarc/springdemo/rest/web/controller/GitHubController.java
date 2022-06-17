@@ -1,7 +1,7 @@
 package dev.jspmarc.springdemo.rest.web.controller;
 
 import dev.jspmarc.springdemo.entity.constant.ApiPath;
-import dev.jspmarc.springdemo.entity.dao.GitHubUser;
+import dev.jspmarc.springdemo.rest.web.model.response.GitHubUserResponse;
 import dev.jspmarc.springdemo.service.api.GitHubService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +23,8 @@ public class GitHubController {
     }
 
     @GetMapping(ApiPath.ROOT)
-    public DeferredResult<List<GitHubUser>> getRandomUsers() {
-        DeferredResult<List<GitHubUser>> result = new DeferredResult<>();
+    public DeferredResult<List<GitHubUserResponse>> getRandomUsers() {
+        DeferredResult<List<GitHubUserResponse>> result = new DeferredResult<>();
 
         gitHubService.getRandomUsers().subscribe(result::setResult, result::setErrorResult);
 

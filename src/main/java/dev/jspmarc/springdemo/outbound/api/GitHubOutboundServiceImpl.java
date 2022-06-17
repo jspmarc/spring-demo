@@ -1,6 +1,6 @@
 package dev.jspmarc.springdemo.outbound.api;
 
-import dev.jspmarc.springdemo.entity.dao.GitHubUser;
+import dev.jspmarc.springdemo.entity.outbound.GitHubUser;
 import dev.jspmarc.springdemo.libraries.mapper.GitHubUserMapper;
 import dev.jspmarc.springdemo.rest.web.model.response.GitHubUserResponse;
 import io.reactivex.Scheduler;

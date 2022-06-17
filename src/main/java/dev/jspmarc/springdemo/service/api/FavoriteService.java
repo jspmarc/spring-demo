@@ -1,13 +1,13 @@
 package dev.jspmarc.springdemo.service.api;
 
-import dev.jspmarc.springdemo.entity.dao.Favorite;
 import dev.jspmarc.springdemo.rest.web.model.request.FavoriteRequest;
+import dev.jspmarc.springdemo.rest.web.model.response.FavoriteResponse;
 import io.reactivex.Single;
 
 import java.util.List;
 
 public interface FavoriteService {
-    Single<List<Favorite>> getAll();
+    Single<List<FavoriteResponse>> getAll();
 
-    Single<Favorite> addToFavorite(FavoriteRequest favoriteRequest);
+    Single<FavoriteResponse> addToFavorite(FavoriteRequest favoriteRequest);
 }

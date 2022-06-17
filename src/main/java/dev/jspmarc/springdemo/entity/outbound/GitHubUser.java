@@ -1,4 +1,4 @@
-package dev.jspmarc.springdemo.entity.dao;
+package dev.jspmarc.springdemo.entity.outbound;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tiket.tix.common.entity.CommonModel;

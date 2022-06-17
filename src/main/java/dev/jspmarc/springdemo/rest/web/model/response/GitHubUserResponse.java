@@ -1,10 +1,8 @@
 package dev.jspmarc.springdemo.rest.web.model.response;
 
 import com.tiket.tix.common.entity.CommonModel;
-import lombok.NoArgsConstructor;
 import net.karneim.pojobuilder.GeneratePojoBuilder;
 
-@NoArgsConstructor
 @GeneratePojoBuilder
 public class GitHubUserResponse extends CommonModel {
     private int gitHubId;

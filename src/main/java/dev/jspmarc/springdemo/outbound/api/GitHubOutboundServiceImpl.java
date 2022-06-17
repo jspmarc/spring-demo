@@ -4,18 +4,20 @@ import dev.jspmarc.springdemo.entity.dao.GitHubUsersResponse;
 import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import retrofit2.Response;
 
 import java.util.Objects;
 
+@Service
 public class GitHubOutboundServiceImpl implements GitHubOutboundService {
     private final GitHubEndpointService endpointService;
     private final Scheduler scheduler;
 
     @Autowired
-    public GitHubOutboundServiceImpl(GitHubEndpointService endpointService, Scheduler scheduler) {
-        this.endpointService = endpointService;
-        this.scheduler = scheduler;
+    public GitHubOutboundServiceImpl(GitHubEndpointService gitHubEndpointService, Scheduler gitHubScheduler) {
+        this.endpointService = gitHubEndpointService;
+        this.scheduler = gitHubScheduler;
     }
 
     @Override

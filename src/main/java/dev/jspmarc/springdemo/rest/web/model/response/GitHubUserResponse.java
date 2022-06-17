@@ -7,22 +7,22 @@ import net.karneim.pojobuilder.GeneratePojoBuilder;
 @NoArgsConstructor
 @GeneratePojoBuilder
 public class GitHubUserResponse extends CommonModel {
-    private long githubId;
-    private String githubLogin;
+    private int gitHubId;
+    private String gitHubLogin;
 
-    public long getGithubId() {
-        return githubId;
+    public int getGitHubId() {
+        return gitHubId;
     }
 
-    public void setGithubId(long githubId) {
-        this.githubId = githubId;
+    public void setGitHubId(int gitHubId) {
+        this.gitHubId = gitHubId;
     }
 
-    public String getGithubLogin() {
-        return githubLogin;
+    public String getGitHubLogin() {
+        return gitHubLogin;
     }
 
-    public void setGithubLogin(String githubLogin) {
-        this.githubLogin = githubLogin;
+    public void setGitHubLogin(String gitHubLogin) {
+        this.gitHubLogin = gitHubLogin;
     }
 }

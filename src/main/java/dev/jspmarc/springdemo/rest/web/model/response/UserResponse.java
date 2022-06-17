@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 public class UserResponse extends CommonModel {
     private String id;
-    private long githubId;
-    private String githubLogin;
+    private int gitHubId;
+    private String gitHubLogin;
 }

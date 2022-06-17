@@ -7,8 +7,8 @@ import dev.jspmarc.springdemo.rest.web.model.response.GitHubUserResponseBuilder;
 public class GitHubUserMapper {
     public static GitHubUserResponse toGitHubUserResponse(GitHubUser ghu) {
         return new GitHubUserResponseBuilder()
-                .withGithubId(ghu.getId())
-                .withGithubLogin(ghu.getLogin())
+                .withGitHubId(ghu.getId())
+                .withGitHubLogin(ghu.getLogin())
                 .build();
     }
 }

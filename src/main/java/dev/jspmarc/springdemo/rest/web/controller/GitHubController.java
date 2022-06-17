@@ -22,11 +22,13 @@ public class GitHubController {
         this.gitHubService = gitHubService;
     }
 
-    @GetMapping(ApiPath.ROOT)
+    @GetMapping(ApiPath.GITHUB_USERS)
     public DeferredResult<List<GitHubUserResponse>> getRandomUsers() {
         DeferredResult<List<GitHubUserResponse>> result = new DeferredResult<>();
 
-        gitHubService.getRandomUsers().subscribe(result::setResult, result::setErrorResult);
+        gitHubService
+                .getRandomUsers()
+                .subscribe(result::setResult, result::setErrorResult);
 
         return result;
     }

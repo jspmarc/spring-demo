@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class GitHubServiceImpl implements GitHubService {
@@ -21,6 +22,8 @@ public class GitHubServiceImpl implements GitHubService {
 
     @Override
     public Single<List<GitHubUserResponse>> getRandomUsers() {
-        return gitHubOutboundService.getRandomUsers(10).onErrorReturnItem(new ArrayList<>());
+        Random random = new Random();
+        int since = random.nextInt(100_000_000);
+        return gitHubOutboundService.getRandomUsers(since).onErrorReturnItem(new ArrayList<>());
     }
 }

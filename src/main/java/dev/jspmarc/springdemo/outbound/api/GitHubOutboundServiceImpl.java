@@ -1,5 +1,6 @@
 package dev.jspmarc.springdemo.outbound.api;
 
+import dev.jspmarc.springdemo.entity.constant.GitHubServiceConstant;
 import dev.jspmarc.springdemo.entity.outbound.GitHubUser;
 import dev.jspmarc.springdemo.libraries.mapper.GitHubUserMapper;
 import dev.jspmarc.springdemo.rest.web.model.response.GitHubUserResponse;
@@ -29,7 +30,7 @@ public class GitHubOutboundServiceImpl implements GitHubOutboundService {
     public Single<List<GitHubUserResponse>> getRandomUsers(int since) {
         return Single.<List<GitHubUserResponse>>create(singleEmitter -> {
                     try {
-                        Response<List<GitHubUser>> response = endpointService.getUsers(since).execute();
+                        Response<List<GitHubUser>> response = endpointService.getUsers(since, GitHubServiceConstant.RESULT_COUNT).execute();
                         if (response.isSuccessful()) {
                             List<GitHubUserResponse> res;
                             if (response.body() != null) {

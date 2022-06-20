@@ -1,13 +1,12 @@
-package dev.jspmarc.springdemo;
+package dev.jspmarc.springdemo.rest.web;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringDemoApplicationTests {
+public class MainTest {
 
     @Test
-    void contextLoads() {
+    public void contextLoads() {
     }
-
 }

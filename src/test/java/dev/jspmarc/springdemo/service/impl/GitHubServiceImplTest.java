@@ -5,6 +5,7 @@ import dev.jspmarc.springdemo.entity.constant.unit.test.GitHubTestVariable;
 import dev.jspmarc.springdemo.outbound.api.GitHubOutboundService;
 import dev.jspmarc.springdemo.rest.web.model.response.GitHubUserResponse;
 import io.reactivex.Single;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -38,7 +39,6 @@ public class GitHubServiceImplTest extends GitHubTestVariable implements GitHubS
 
         // verify outbound service is called exactly once
         verify(gitHubOutboundService).getRandomUsers(anyInt());
-        verifyNoMoreInteractions(gitHubOutboundService);
     }
 
     @Test
@@ -50,6 +50,10 @@ public class GitHubServiceImplTest extends GitHubTestVariable implements GitHubS
 
         // verify outbound service is called exactly once
         verify(gitHubOutboundService).getRandomUsers(anyInt());
+    }
+
+    @After
+    public void tearDown() {
         verifyNoMoreInteractions(gitHubOutboundService);
     }
 }

@@ -26,5 +26,6 @@ public class GitHubServiceImpl implements GitHubService {
     Random random = new Random();
     int since = random.nextInt(GitHubServiceConstant.MAX_USER_ID);
     return gitHubOutboundService.getRandomUsers(since).onErrorReturnItem(new ArrayList<>());
+
   }
 }

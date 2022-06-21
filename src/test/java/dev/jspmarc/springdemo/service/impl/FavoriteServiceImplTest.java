@@ -4,6 +4,7 @@ import dev.jspmarc.springdemo.dao.api.FavoriteRepository;
 import dev.jspmarc.springdemo.entity.constant.unit.test.FavoriteTestVariable;
 import dev.jspmarc.springdemo.entity.dao.Favorite;
 import dev.jspmarc.springdemo.rest.web.model.request.FavoriteRequest;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -42,7 +43,6 @@ public class FavoriteServiceImplTest extends FavoriteTestVariable {
 
     // verify findAll is called exactly once
     verify(favoriteRepository).findAll();
-    verifyNoMoreInteractions(favoriteRepository);
   }
 
   @Test
@@ -64,6 +64,10 @@ public class FavoriteServiceImplTest extends FavoriteTestVariable {
 
     // verify insert is called exactly once
     verify(favoriteRepository).insert((Favorite) anyObject());
+  }
+
+  @After
+  public void tearDown() {
     verifyNoMoreInteractions(favoriteRepository);
   }
 }

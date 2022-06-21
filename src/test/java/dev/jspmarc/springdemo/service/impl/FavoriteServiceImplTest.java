@@ -34,7 +34,8 @@ public class FavoriteServiceImplTest extends FavoriteTestVariable {
       boolean allSame = true;
       for (int i = 0; i < favoriteResponses.size() && allSame; ++i) {
         allSame = favoriteResponses.get(i).getGitHubId() == favorites.get(i).getGitHubId()
-                && favoriteResponses.get(i).getGitHubLogin().equals(favorites.get(i).getGitHubLogin());
+                && favoriteResponses.get(i).getGitHubLogin().equals(favorites.get(i).getGitHubLogin())
+                && favoriteResponses.get(i).getId().equals(favorites.get(i).getId());
       }
       return allSame;
     });
@@ -58,7 +59,8 @@ public class FavoriteServiceImplTest extends FavoriteTestVariable {
             .addToFavorite(favoriteRequest)
             .test()
             .assertValue(f -> f.getGitHubId() == favorite.getGitHubId()
-                    && f.getGitHubLogin().equals(favorite.getGitHubLogin()));
+                    && f.getGitHubLogin().equals(favorite.getGitHubLogin())
+                    && f.getId().equals(favorite.getId()));
 
     // verify insert is called exactly once
     verify(favoriteRepository).insert((Favorite) anyObject());

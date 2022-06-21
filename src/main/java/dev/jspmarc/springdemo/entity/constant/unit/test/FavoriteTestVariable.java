@@ -18,6 +18,7 @@ public class FavoriteTestVariable implements GitHubServiceConstant {
         return new FavoriteBuilder()
                 .withGitHubId(id)
                 .withGitHubLogin("user" + id)
+                .withId("sss" + id)
                 .build();
     }
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(ApiPath.BASE_TEST_PATH)
 public class TestController {
 
-  @GetMapping(ApiPath.ROOT)
+  @GetMapping()
   @ResponseStatus(code = HttpStatus.I_AM_A_TEAPOT)
   public void test() {
   }

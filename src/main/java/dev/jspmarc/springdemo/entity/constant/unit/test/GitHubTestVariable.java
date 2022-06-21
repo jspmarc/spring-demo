@@ -20,7 +20,10 @@ public class GitHubTestVariable {
 
   public static List<GitHubUserResponse> getUserResponses() {
     ArrayList<GitHubUserResponse> list = new ArrayList<>();
-    int n = rand.nextInt(10);
+    int n;
+    do {
+      n = rand.nextInt(10);
+    } while (n <= 0);
     for (int i = 0; i < n; ++i) {
       list.add(new GitHubUserResponseBuilder()
               .withGitHubId(rand.nextInt(GitHubServiceConstant.MAX_USER_ID))

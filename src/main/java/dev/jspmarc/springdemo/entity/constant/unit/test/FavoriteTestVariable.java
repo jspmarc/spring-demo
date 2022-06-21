@@ -5,6 +5,8 @@ import dev.jspmarc.springdemo.entity.dao.Favorite;
 import dev.jspmarc.springdemo.entity.dao.FavoriteBuilder;
 import dev.jspmarc.springdemo.rest.web.model.request.FavoriteRequest;
 import dev.jspmarc.springdemo.rest.web.model.request.FavoriteRequestBuilder;
+import dev.jspmarc.springdemo.rest.web.model.response.FavoriteResponse;
+import dev.jspmarc.springdemo.rest.web.model.response.FavoriteResponseBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,14 +31,37 @@ public class FavoriteTestVariable implements GitHubServiceConstant {
                 .build();
     }
 
-    public static List<Favorite> getFavorites() {
-        ArrayList<Favorite> favorites = new ArrayList<>();
+  public static List<Favorite> getFavorites() {
+    ArrayList<Favorite> favorites = new ArrayList<>();
 
-        int n = rand.nextInt(10);
-        for (int i = 0; i < n; ++i) {
-            favorites.add(getFavorite());
-        }
-
-        return favorites;
+    int n = rand.nextInt(10);
+    for (int i = 0; i < n; ++i) {
+      favorites.add(getFavorite());
     }
+
+    return favorites;
+  }
+
+
+  public static FavoriteResponse getFavoriteResponse() {
+    int id = rand.nextInt(MAX_USER_ID);
+    return new FavoriteResponseBuilder()
+            .withGitHubId(id)
+            .withGitHubLogin("user" + id)
+            .withId("sss" + id)
+            .build();
+  }
+
+  public static List<FavoriteResponse> getFavoriteResponses() {
+    ArrayList<FavoriteResponse> favorites = new ArrayList<>();
+    int n;
+    do {
+      n = rand.nextInt(10);
+    } while (n <= 0);
+    for (int i = 0; i < n; ++i) {
+      favorites.add(getFavoriteResponse());
+    }
+
+    return favorites;
+  }
 }

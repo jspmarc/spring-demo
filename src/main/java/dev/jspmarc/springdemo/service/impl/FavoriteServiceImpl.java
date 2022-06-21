@@ -16,38 +16,38 @@ import java.util.stream.Collectors;
 
 @Service
 public class FavoriteServiceImpl implements FavoriteService {
-    private final FavoriteRepository favoriteRepository;
+  private final FavoriteRepository favoriteRepository;
 
-    @Autowired
-    public FavoriteServiceImpl(FavoriteRepository favoriteRepository) {
-        this.favoriteRepository = favoriteRepository;
-    }
+  @Autowired
+  public FavoriteServiceImpl(FavoriteRepository favoriteRepository) {
+    this.favoriteRepository = favoriteRepository;
+  }
 
-    @Override
-    public Single<List<FavoriteResponse>> getAll() {
-        return Single.just(favoriteRepository
-                .findAll()
-                .stream()
-                .map(favorite -> new FavoriteResponseBuilder()
-                        .withGitHubId(favorite.getGitHubId())
-                        .withGitHubLogin(favorite.getGitHubLogin())
-                        .withId(favorite.getId())
-                        .build())
-                .collect(Collectors.toList()));
-    }
+  @Override
+  public Single<List<FavoriteResponse>> getAll() {
+    return Single.just(favoriteRepository
+            .findAll()
+            .stream()
+            .map(favorite -> new FavoriteResponseBuilder()
+                    .withGitHubId(favorite.getGitHubId())
+                    .withGitHubLogin(favorite.getGitHubLogin())
+                    .withId(favorite.getId())
+                    .build())
+            .collect(Collectors.toList()));
+  }
 
-    @Override
-    public Single<FavoriteResponse> addToFavorite(FavoriteRequest favoriteRequest) {
-        Favorite favorite = favoriteRepository.insert(
-                new FavoriteBuilder()
-                        .withGitHubId(favoriteRequest.getGitHubId())
-                        .withGitHubLogin(favoriteRequest.getGitHubLogin())
-                        .build()
-        );
-        return Single.just(new FavoriteResponseBuilder()
-                .withGitHubId(favorite.getGitHubId())
-                .withGitHubLogin(favorite.getGitHubLogin())
-                .withId(favorite.getId())
-                .build());
-    }
+  @Override
+  public Single<FavoriteResponse> addToFavorite(FavoriteRequest favoriteRequest) {
+    Favorite favorite = favoriteRepository.insert(
+            new FavoriteBuilder()
+                    .withGitHubId(favoriteRequest.getGitHubId())
+                    .withGitHubLogin(favoriteRequest.getGitHubLogin())
+                    .build()
+    );
+    return Single.just(new FavoriteResponseBuilder()
+            .withGitHubId(favorite.getGitHubId())
+            .withGitHubLogin(favorite.getGitHubLogin())
+            .withId(favorite.getId())
+            .build());
+  }
 }

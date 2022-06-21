@@ -17,47 +17,47 @@ import java.util.stream.Collectors;
 
 @Service
 public class GitHubOutboundServiceImpl implements GitHubOutboundService {
-    private final GitHubEndpointService endpointService;
-    private final Scheduler scheduler;
+  private final GitHubEndpointService endpointService;
+  private final Scheduler scheduler;
 
-    @Autowired
-    public GitHubOutboundServiceImpl(GitHubEndpointService gitHubEndpointService, Scheduler gitHubScheduler) {
-        this.endpointService = gitHubEndpointService;
-        this.scheduler = gitHubScheduler;
-    }
+  @Autowired
+  public GitHubOutboundServiceImpl(GitHubEndpointService gitHubEndpointService, Scheduler gitHubScheduler) {
+    this.endpointService = gitHubEndpointService;
+    this.scheduler = gitHubScheduler;
+  }
 
-    @Override
-    public Single<List<GitHubUserResponse>> getRandomUsers(int since) {
-        return Single.<List<GitHubUserResponse>>create(singleEmitter -> {
-                    try {
-                        Response<List<GitHubUser>> response = endpointService.getUsers(since, GitHubServiceConstant.RESULT_COUNT).execute();
-                        if (response.isSuccessful()) {
-                            List<GitHubUserResponse> res;
-                            if (response.body() != null) {
-                                res = response
-                                        .body()
-                                        .stream()
-                                        .map(GitHubUserMapper::toGitHubUserResponse)
-                                        .collect(Collectors.toList());
-                            } else {
-                                res = new ArrayList<>();
-                            }
-                            singleEmitter.onSuccess(res);
-                            return;
-                        }
-                        if (Objects.nonNull(response.errorBody())) {
-                            singleEmitter.onError(new Exception(response.errorBody().string()));
-                            return;
-                        }
-                        singleEmitter.onError(new Exception("Unknown error"));
-                    } catch (Exception e) {
-                        System.err.println("Call failed: " + e);
-                    }
+  @Override
+  public Single<List<GitHubUserResponse>> getRandomUsers(int since) {
+    return Single.<List<GitHubUserResponse>>create(singleEmitter -> {
+              try {
+                Response<List<GitHubUser>> response = endpointService.getUsers(since, GitHubServiceConstant.RESULT_COUNT).execute();
+                if (response.isSuccessful()) {
+                  List<GitHubUserResponse> res;
+                  if (response.body() != null) {
+                    res = response
+                            .body()
+                            .stream()
+                            .map(GitHubUserMapper::toGitHubUserResponse)
+                            .collect(Collectors.toList());
+                  } else {
+                    res = new ArrayList<>();
+                  }
+                  singleEmitter.onSuccess(res);
+                  return;
+                }
+                if (Objects.nonNull(response.errorBody())) {
+                  singleEmitter.onError(new Exception(response.errorBody().string()));
+                  return;
+                }
+                singleEmitter.onError(new Exception("Unknown error"));
+              } catch (Exception e) {
+                System.err.println("Call failed: " + e);
+              }
 
-                    singleEmitter.onSuccess(new ArrayList<>());
-                })
-                .doOnError(System.err::println)
-                .onErrorResumeNext(Single::error)
-                .subscribeOn(scheduler);
-    }
+              singleEmitter.onSuccess(new ArrayList<>());
+            })
+            .doOnError(System.err::println)
+            .onErrorResumeNext(Single::error)
+            .subscribeOn(scheduler);
+  }
 }

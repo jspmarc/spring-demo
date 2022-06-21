@@ -9,6 +9,6 @@ import retrofit2.http.Query;
 import java.util.List;
 
 public interface GitHubEndpointService {
-    @GET(ApiPath.GITHUB_USERS)
-    Call<List<GitHubUser>> getUsers(@Query("since") int since, @Query("per_page") int perPage);
+  @GET(ApiPath.GITHUB_USERS)
+  Call<List<GitHubUser>> getUsers(@Query("since") int since, @Query("per_page") int perPage);
 }

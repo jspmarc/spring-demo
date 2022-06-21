@@ -6,5 +6,5 @@ import io.reactivex.Single;
 import java.util.List;
 
 public interface GitHubService {
-    Single<List<GitHubUserResponse>> getRandomUsers();
+  Single<List<GitHubUserResponse>> getRandomUsers();
 }

@@ -9,9 +9,9 @@ import org.springframework.data.mongodb.config.EnableMongoAuditing;
 @Configuration
 @EnableMongoAuditing
 public class MongoConfiguration {
-    @Bean
-    @Primary
-    public MongoClientOptions primaryMongoClientOptions() {
-        return MongoClientOptions.builder().build();
-    }
+  @Bean
+  @Primary
+  public MongoClientOptions primaryMongoClientOptions() {
+    return MongoClientOptions.builder().build();
+  }
 }

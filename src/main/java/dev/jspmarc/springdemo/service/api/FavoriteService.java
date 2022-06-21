@@ -7,7 +7,7 @@ import io.reactivex.Single;
 import java.util.List;
 
 public interface FavoriteService {
-    Single<List<FavoriteResponse>> getAll();
+  Single<List<FavoriteResponse>> getAll();
 
-    Single<FavoriteResponse> addToFavorite(FavoriteRequest favoriteRequest);
+  Single<FavoriteResponse> addToFavorite(FavoriteRequest favoriteRequest);
 }

@@ -10,20 +10,20 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 @Configuration
 public class RetrofitConfiguration {
 
-    @Bean
-    public Retrofit retrofitGitHubEndpointService(GitHubApiProperties gitHubApiProperties) {
-        return getRetrofit(gitHubApiProperties);
-    }
+  @Bean
+  public Retrofit retrofitGitHubEndpointService(GitHubApiProperties gitHubApiProperties) {
+    return getRetrofit(gitHubApiProperties);
+  }
 
-    @Bean
-    public GitHubEndpointService gitHubEndpointService(@Qualifier(value = "retrofitGitHubEndpointService") Retrofit retrofitGitHub) {
-        return retrofitGitHub.create(GitHubEndpointService.class);
-    }
+  @Bean
+  public GitHubEndpointService gitHubEndpointService(@Qualifier(value = "retrofitGitHubEndpointService") Retrofit retrofitGitHub) {
+    return retrofitGitHub.create(GitHubEndpointService.class);
+  }
 
-    private Retrofit getRetrofit(OutboundProperties outboundProperties) {
-        return new Retrofit.Builder()
-                .baseUrl(outboundProperties.getHost())
-                .addConverterFactory(JacksonConverterFactory.create())
-                .build();
-    }
+  private Retrofit getRetrofit(OutboundProperties outboundProperties) {
+    return new Retrofit.Builder()
+            .baseUrl(outboundProperties.getHost())
+            .addConverterFactory(JacksonConverterFactory.create())
+            .build();
+  }
 }

@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.convert.MongoConverter;
 
 @Configuration
 public class ServiceConfiguration {
-    public MongoTemplate mongoTemplate(MongoDbFactory mongoDbFactory, MongoConverter mongoConverter) {
-        return new MongoTemplate(mongoDbFactory, mongoConverter);
-    }
+  public MongoTemplate mongoTemplate(MongoDbFactory mongoDbFactory, MongoConverter mongoConverter) {
+    return new MongoTemplate(mongoDbFactory, mongoConverter);
+  }
 }

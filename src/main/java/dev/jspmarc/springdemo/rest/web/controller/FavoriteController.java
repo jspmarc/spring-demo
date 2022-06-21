@@ -18,31 +18,31 @@ import java.util.List;
 @RequestMapping(ApiPath.BASE_FAVORITE_PATH)
 public class FavoriteController {
 
-    private final FavoriteService favoriteService;
+  private final FavoriteService favoriteService;
 
-    @Autowired
-    public FavoriteController(FavoriteService favoriteService) {
-        this.favoriteService = favoriteService;
-    }
+  @Autowired
+  public FavoriteController(FavoriteService favoriteService) {
+    this.favoriteService = favoriteService;
+  }
 
-    @GetMapping
-    public DeferredResult<BaseResponse<List<FavoriteResponse>>> getFavorites() {
-        DeferredResult<BaseResponse<List<FavoriteResponse>>> result = new DeferredResult<>();
-        favoriteService
-                .getAll()
-                .map(favorites -> CommonResponse.constructResponse(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getMessage(), null, favorites))
-                .subscribe(result::setResult, result::setErrorResult);
-        return result;
-    }
+  @GetMapping
+  public DeferredResult<BaseResponse<List<FavoriteResponse>>> getFavorites() {
+    DeferredResult<BaseResponse<List<FavoriteResponse>>> result = new DeferredResult<>();
+    favoriteService
+            .getAll()
+            .map(favorites -> CommonResponse.constructResponse(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getMessage(), null, favorites))
+            .subscribe(result::setResult, result::setErrorResult);
+    return result;
+  }
 
-    @PostMapping
-    @ResponseStatus(code = HttpStatus.CREATED)
-    public DeferredResult<BaseResponse<FavoriteResponse>> favoritesUser(@RequestBody FavoriteRequest req) {
-        DeferredResult<BaseResponse<FavoriteResponse>> result = new DeferredResult<>();
-        favoriteService
-                .addToFavorite(req)
-                .map(f -> CommonResponse.constructResponse(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getMessage(), null, f))
-                .subscribe(result::setResult, result::setErrorResult);
-        return result;
-    }
+  @PostMapping
+  @ResponseStatus(code = HttpStatus.CREATED)
+  public DeferredResult<BaseResponse<FavoriteResponse>> favoritesUser(@RequestBody FavoriteRequest req) {
+    DeferredResult<BaseResponse<FavoriteResponse>> result = new DeferredResult<>();
+    favoriteService
+            .addToFavorite(req)
+            .map(f -> CommonResponse.constructResponse(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getMessage(), null, f))
+            .subscribe(result::setResult, result::setErrorResult);
+    return result;
+  }
 }

@@ -18,22 +18,22 @@ import java.util.List;
 @RequestMapping(ApiPath.BASE_GITHUB_PATH)
 public class GitHubController {
 
-    private final GitHubService gitHubService;
+  private final GitHubService gitHubService;
 
-    @Autowired
-    public GitHubController(GitHubService gitHubService) {
-        this.gitHubService = gitHubService;
-    }
+  @Autowired
+  public GitHubController(GitHubService gitHubService) {
+    this.gitHubService = gitHubService;
+  }
 
-    @GetMapping(ApiPath.GITHUB_USERS)
-    public DeferredResult<BaseResponse<List<GitHubUserResponse>>> getRandomUsers() {
-        DeferredResult<BaseResponse<List<GitHubUserResponse>>> result = new DeferredResult<>();
+  @GetMapping(ApiPath.GITHUB_USERS)
+  public DeferredResult<BaseResponse<List<GitHubUserResponse>>> getRandomUsers() {
+    DeferredResult<BaseResponse<List<GitHubUserResponse>>> result = new DeferredResult<>();
 
-        gitHubService
-                .getRandomUsers()
-                .map(users -> CommonResponse.constructResponse(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getMessage(), null, users))
-                .subscribe(result::setResult, result::setErrorResult);
+    gitHubService
+            .getRandomUsers()
+            .map(users -> CommonResponse.constructResponse(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getMessage(), null, users))
+            .subscribe(result::setResult, result::setErrorResult);
 
-        return result;
-    }
+    return result;
+  }
 }

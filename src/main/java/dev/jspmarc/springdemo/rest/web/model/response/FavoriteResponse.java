@@ -5,31 +5,31 @@ import net.karneim.pojobuilder.GeneratePojoBuilder;
 
 @GeneratePojoBuilder
 public class FavoriteResponse extends CommonModel {
-    private String id;
-    private int gitHubId;
-    private String gitHubLogin;
+  private String id;
+  private int gitHubId;
+  private String gitHubLogin;
 
-    public String getId() {
-        return id;
-    }
+  public String getId() {
+    return id;
+  }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+  public void setId(String id) {
+    this.id = id;
+  }
 
-    public int getGitHubId() {
-        return gitHubId;
-    }
+  public int getGitHubId() {
+    return gitHubId;
+  }
 
-    public void setGitHubId(int gitHubId) {
-        this.gitHubId = gitHubId;
-    }
+  public void setGitHubId(int gitHubId) {
+    this.gitHubId = gitHubId;
+  }
 
-    public String getGitHubLogin() {
-        return gitHubLogin;
-    }
+  public String getGitHubLogin() {
+    return gitHubLogin;
+  }
 
-    public void setGitHubLogin(String gitHubLogin) {
-        this.gitHubLogin = gitHubLogin;
-    }
+  public void setGitHubLogin(String gitHubLogin) {
+    this.gitHubLogin = gitHubLogin;
+  }
 }

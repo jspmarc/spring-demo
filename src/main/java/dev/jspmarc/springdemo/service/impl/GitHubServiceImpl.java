@@ -14,17 +14,17 @@ import java.util.Random;
 
 @Service
 public class GitHubServiceImpl implements GitHubService {
-    private final GitHubOutboundService gitHubOutboundService;
+  private final GitHubOutboundService gitHubOutboundService;
 
-    @Autowired
-    public GitHubServiceImpl(GitHubOutboundService gitHubOutboundService) {
-        this.gitHubOutboundService = gitHubOutboundService;
-    }
+  @Autowired
+  public GitHubServiceImpl(GitHubOutboundService gitHubOutboundService) {
+    this.gitHubOutboundService = gitHubOutboundService;
+  }
 
-    @Override
-    public Single<List<GitHubUserResponse>> getRandomUsers() {
-        Random random = new Random();
-        int since = random.nextInt(GitHubServiceConstant.MAX_USER_ID);
-        return gitHubOutboundService.getRandomUsers(since).onErrorReturnItem(new ArrayList<>());
-    }
+  @Override
+  public Single<List<GitHubUserResponse>> getRandomUsers() {
+    Random random = new Random();
+    int since = random.nextInt(GitHubServiceConstant.MAX_USER_ID);
+    return gitHubOutboundService.getRandomUsers(since).onErrorReturnItem(new ArrayList<>());
+  }
 }

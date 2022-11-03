@@ -24,29 +24,32 @@ public class FavoriteServiceImpl implements FavoriteService {
 
   @Override
   public Single<List<FavoriteResponse>> getAll() {
-    return Single.just(favoriteRepository
-        .findAll()
-        .stream()
-        .map(favorite -> FavoriteResponse.builder()
-            .gitHubId(favorite.getGitHubId())
-            .gitHubLogin(favorite.getGitHubLogin())
-            .id(favorite.getId())
-            .build())
-        .collect(Collectors.toList()));
+    return Single.fromCallable(() ->
+        favoriteRepository
+            .findAll()
+            .stream()
+            .map(favorite -> FavoriteResponse.builder()
+                .gitHubId(favorite.getGitHubId())
+                .gitHubLogin(favorite.getGitHubLogin())
+                .id(favorite.getId())
+                .build())
+            .collect(Collectors.toList()));
   }
 
   @Override
   public Single<FavoriteResponse> addToFavorite(FavoriteRequest favoriteRequest) {
-    Favorite favorite = favoriteRepository.save(
-        Favorite.builder()
-            .gitHubId(favoriteRequest.getGitHubId())
-            .gitHubLogin(favoriteRequest.getGitHubLogin())
-            .build()
-    );
-    return Single.just(FavoriteResponse.builder()
-        .gitHubId(favorite.getGitHubId())
-        .gitHubLogin(favorite.getGitHubLogin())
-        .id(favorite.getId())
-        .build());
+    return Single.fromCallable(() -> {
+      Favorite favorite = favoriteRepository.save(
+          Favorite.builder()
+              .gitHubId(favoriteRequest.getGitHubId())
+              .gitHubLogin(favoriteRequest.getGitHubLogin())
+              .build()
+      );
+      return FavoriteResponse.builder()
+          .gitHubId(favorite.getGitHubId())
+          .gitHubLogin(favorite.getGitHubLogin())
+          .id(favorite.getId())
+          .build();
+    });
   }
 }

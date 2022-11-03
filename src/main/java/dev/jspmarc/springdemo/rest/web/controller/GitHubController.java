@@ -2,8 +2,8 @@ package dev.jspmarc.springdemo.rest.web.controller;
 
 import com.tiket.tix.common.rest.web.model.response.BaseResponse;
 import com.tiket.tix.common.rest.web.model.response.CommonResponse;
-import com.tiket.tix.hotel.common.model.enums.ResponseCode;
 import dev.jspmarc.springdemo.entity.constant.ApiPath;
+import dev.jspmarc.springdemo.entity.constant.ResponseCode;
 import dev.jspmarc.springdemo.rest.web.model.response.GitHubUserResponse;
 import dev.jspmarc.springdemo.service.api.GitHubService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +30,10 @@ public class GitHubController {
     DeferredResult<BaseResponse<List<GitHubUserResponse>>> result = new DeferredResult<>();
 
     gitHubService
-            .getRandomUsers()
-            .map(users -> CommonResponse.constructResponse(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getMessage(), null, users))
-            .subscribe(result::setResult, result::setErrorResult);
+        .getRandomUsers()
+        .map(users -> CommonResponse.constructResponse(ResponseCode.SUCCESS.getCode(),
+            ResponseCode.SUCCESS.getMessage(), null, users))
+        .subscribe(result::setResult, result::setErrorResult);
 
     return result;
   }

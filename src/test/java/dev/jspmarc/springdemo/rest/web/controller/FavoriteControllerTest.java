@@ -1,11 +1,10 @@
 package dev.jspmarc.springdemo.rest.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tiket.tix.hotel.common.model.enums.ResponseCode;
 import dev.jspmarc.springdemo.entity.constant.ApiPath;
+import dev.jspmarc.springdemo.entity.constant.ResponseCode;
 import dev.jspmarc.springdemo.entity.constant.unit.test.FavoriteTestVariable;
 import dev.jspmarc.springdemo.rest.web.model.request.FavoriteRequest;
-import dev.jspmarc.springdemo.rest.web.model.request.FavoriteRequestBuilder;
 import dev.jspmarc.springdemo.rest.web.model.response.FavoriteResponse;
 import dev.jspmarc.springdemo.service.api.FavoriteService;
 import io.reactivex.Single;
@@ -45,18 +44,18 @@ public class FavoriteControllerTest extends FavoriteTestVariable {
     when(favoriteService.getAll()).thenReturn(Single.just(responses));
 
     MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
-            .get(ApiPath.BASE_FAVORITE_PATH)
-            .accept(MediaType.APPLICATION_JSON);
+        .get(ApiPath.BASE_FAVORITE_PATH)
+        .accept(MediaType.APPLICATION_JSON);
 
     MvcResult deferredResult = mockMvc.perform(builder).andReturn();
     mockMvc.perform(asyncDispatch(deferredResult))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("errors", equalTo(null)))
-            .andExpect(jsonPath("code", equalTo(ResponseCode.SUCCESS.getCode())))
-            .andExpect(jsonPath("message", equalTo(ResponseCode.SUCCESS.getMessage())))
-            .andExpect(jsonPath("data[0].id", equalTo(responses.get(0).getId())))
-            .andExpect(jsonPath("data[0].gitHubLogin", equalTo(responses.get(0).getGitHubLogin())))
-            .andExpect(jsonPath("data[0].gitHubId", equalTo(responses.get(0).getGitHubId())));
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("errors", equalTo(null)))
+        .andExpect(jsonPath("code", equalTo(ResponseCode.SUCCESS.getCode())))
+        .andExpect(jsonPath("message", equalTo(ResponseCode.SUCCESS.getMessage())))
+        .andExpect(jsonPath("data[0].id", equalTo(responses.get(0).getId())))
+        .andExpect(jsonPath("data[0].gitHubLogin", equalTo(responses.get(0).getGitHubLogin())))
+        .andExpect(jsonPath("data[0].gitHubId", equalTo(responses.get(0).getGitHubId())));
 
     // make sure getAll service was called
     verify(favoriteService).getAll();
@@ -65,28 +64,28 @@ public class FavoriteControllerTest extends FavoriteTestVariable {
   @Test
   public void favoritesUserTest() throws Exception {
     FavoriteResponse response = getFavoriteResponse();
-    FavoriteRequest request = new FavoriteRequestBuilder()
-            .withGitHubLogin(response.getGitHubLogin())
-            .withGitHubId(response.getGitHubId())
-            .build();
+    FavoriteRequest request = FavoriteRequest.builder()
+        .gitHubLogin(response.getGitHubLogin())
+        .gitHubId(response.getGitHubId())
+        .build();
     when(favoriteService.addToFavorite(request))
-            .thenReturn(Single.just(response));
+        .thenReturn(Single.just(response));
 
     MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
-            .post(ApiPath.BASE_FAVORITE_PATH)
-            .accept(MediaType.APPLICATION_JSON)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(response));
+        .post(ApiPath.BASE_FAVORITE_PATH)
+        .accept(MediaType.APPLICATION_JSON)
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(response));
 
     MvcResult deferredResult = mockMvc.perform(builder).andReturn();
     mockMvc.perform(asyncDispatch(deferredResult))
-            .andExpect(status().isCreated())
-            .andExpect(jsonPath("errors", equalTo(null)))
-            .andExpect(jsonPath("code", equalTo(ResponseCode.SUCCESS.getCode())))
-            .andExpect(jsonPath("message", equalTo(ResponseCode.SUCCESS.getMessage())))
-            .andExpect(jsonPath("data.id", equalTo(response.getId())))
-            .andExpect(jsonPath("data.gitHubLogin", equalTo(response.getGitHubLogin())))
-            .andExpect(jsonPath("data.gitHubId", equalTo(response.getGitHubId())));
+        .andExpect(status().isCreated())
+        .andExpect(jsonPath("errors", equalTo(null)))
+        .andExpect(jsonPath("code", equalTo(ResponseCode.SUCCESS.getCode())))
+        .andExpect(jsonPath("message", equalTo(ResponseCode.SUCCESS.getMessage())))
+        .andExpect(jsonPath("data.id", equalTo(response.getId())))
+        .andExpect(jsonPath("data.gitHubLogin", equalTo(response.getGitHubLogin())))
+        .andExpect(jsonPath("data.gitHubId", equalTo(response.getGitHubId())));
 
     // make sure getAll service was called
     verify(favoriteService).addToFavorite(request);

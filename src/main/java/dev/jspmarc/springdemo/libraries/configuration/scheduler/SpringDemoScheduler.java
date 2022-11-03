@@ -1,7 +1,6 @@
 package dev.jspmarc.springdemo.libraries.configuration.scheduler;
 
-import com.tiket.tix.currency.libraries.factory.NamingThreadFactory;
-import com.tiket.tix.hotel.cart.libraries.configuration.scheduler.SchedulerConfiguration;
+import dev.jspmarc.springdemo.libraries.factory.NamedThreadFactory;
 import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
 import org.springframework.context.annotation.Bean;
@@ -28,7 +27,7 @@ public class SpringDemoScheduler {
     int maxQueue =
             configuration.getMaxQueue() != null ? configuration.getMaxQueue() : Integer.MAX_VALUE;
 
-    NamingThreadFactory threadFactory = new NamingThreadFactory(prefix);
+    NamedThreadFactory threadFactory = new NamedThreadFactory(prefix);
 
     return Schedulers.from(new ThreadPoolExecutor(minIdle, maxThread, ttl, TimeUnit.SECONDS,
             new LinkedBlockingQueue<>(maxQueue), threadFactory));

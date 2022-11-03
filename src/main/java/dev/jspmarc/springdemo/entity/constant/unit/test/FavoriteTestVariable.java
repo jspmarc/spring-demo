@@ -2,34 +2,32 @@ package dev.jspmarc.springdemo.entity.constant.unit.test;
 
 import dev.jspmarc.springdemo.entity.constant.GitHubServiceConstant;
 import dev.jspmarc.springdemo.entity.dao.Favorite;
-import dev.jspmarc.springdemo.entity.dao.FavoriteBuilder;
 import dev.jspmarc.springdemo.rest.web.model.request.FavoriteRequest;
-import dev.jspmarc.springdemo.rest.web.model.request.FavoriteRequestBuilder;
 import dev.jspmarc.springdemo.rest.web.model.response.FavoriteResponse;
-import dev.jspmarc.springdemo.rest.web.model.response.FavoriteResponseBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class FavoriteTestVariable implements GitHubServiceConstant {
-    private final static Random rand = new Random();
 
-    public static Favorite getFavorite() {
-        int id = rand.nextInt(MAX_USER_ID);
-        return new FavoriteBuilder()
-                .withGitHubId(id)
-                .withGitHubLogin("user" + id)
-                .withId("sss" + id)
-                .build();
-    }
+  private final static Random rand = new Random();
 
-    public static FavoriteRequest getFavoriteRequest(int id, String login) {
-        return new FavoriteRequestBuilder()
-                .withGitHubId(id)
-                .withGitHubLogin(login)
-                .build();
-    }
+  public static Favorite getFavorite() {
+    int id = rand.nextInt(MAX_USER_ID);
+    return Favorite.builder()
+        .gitHubId(id)
+        .gitHubLogin("user" + id)
+        .id("sss" + id)
+        .build();
+  }
+
+  public static FavoriteRequest getFavoriteRequest(int id, String login) {
+    return FavoriteRequest.builder()
+        .gitHubId(id)
+        .gitHubLogin(login)
+        .build();
+  }
 
   public static List<Favorite> getFavorites() {
     ArrayList<Favorite> favorites = new ArrayList<>();
@@ -45,11 +43,11 @@ public class FavoriteTestVariable implements GitHubServiceConstant {
 
   public static FavoriteResponse getFavoriteResponse() {
     int id = rand.nextInt(MAX_USER_ID);
-    return new FavoriteResponseBuilder()
-            .withGitHubId(id)
-            .withGitHubLogin("user" + id)
-            .withId("sss" + id)
-            .build();
+    return FavoriteResponse.builder()
+        .gitHubId(id)
+        .gitHubLogin("user" + id)
+        .id("sss" + id)
+        .build();
   }
 
   public static List<FavoriteResponse> getFavoriteResponses() {

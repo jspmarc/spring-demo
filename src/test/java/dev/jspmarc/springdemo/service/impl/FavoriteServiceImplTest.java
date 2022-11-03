@@ -35,8 +35,8 @@ public class FavoriteServiceImplTest extends FavoriteTestVariable {
       boolean allSame = true;
       for (int i = 0; i < favoriteResponses.size() && allSame; ++i) {
         allSame = favoriteResponses.get(i).getGitHubId() == favorites.get(i).getGitHubId()
-                && favoriteResponses.get(i).getGitHubLogin().equals(favorites.get(i).getGitHubLogin())
-                && favoriteResponses.get(i).getId().equals(favorites.get(i).getId());
+            && favoriteResponses.get(i).getGitHubLogin().equals(favorites.get(i).getGitHubLogin())
+            && favoriteResponses.get(i).getId().equals(favorites.get(i).getId());
       }
       return allSame;
     });
@@ -46,24 +46,26 @@ public class FavoriteServiceImplTest extends FavoriteTestVariable {
   }
 
   @Test
-  public void addToFavoriteTest() {
+  public void addToFavoriteTest() throws InterruptedException {
     // setup repo result
     Favorite favorite = getFavorite();
-    when(favoriteRepository.insert((Favorite) anyObject())).thenReturn(favorite);
+    when(favoriteRepository.save(any(Favorite.class))).thenReturn(favorite);
 
     // then create request with the same id and login
-    FavoriteRequest favoriteRequest = getFavoriteRequest(favorite.getGitHubId(), favorite.getGitHubLogin());
+    FavoriteRequest favoriteRequest = getFavoriteRequest(favorite.getGitHubId(),
+        favorite.getGitHubLogin());
 
     // test result is the same
     favoriteService
-            .addToFavorite(favoriteRequest)
-            .test()
-            .assertValue(f -> f.getGitHubId() == favorite.getGitHubId()
-                    && f.getGitHubLogin().equals(favorite.getGitHubLogin())
-                    && f.getId().equals(favorite.getId()));
+        .addToFavorite(favoriteRequest)
+        .test()
+        .await()
+        .assertValue(f -> f.getGitHubId() == favorite.getGitHubId()
+            && f.getGitHubLogin().equals(favorite.getGitHubLogin())
+            && f.getId().equals(favorite.getId()));
 
     // verify insert is called exactly once
-    verify(favoriteRepository).insert((Favorite) anyObject());
+    verify(favoriteRepository).save(any(Favorite.class));
   }
 
   @After

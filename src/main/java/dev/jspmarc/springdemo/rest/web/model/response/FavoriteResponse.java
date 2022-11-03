@@ -6,9 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import net.karneim.pojobuilder.GeneratePojoBuilder;
 
-@GeneratePojoBuilder
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)

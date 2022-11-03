@@ -1,7 +1,7 @@
 package dev.jspmarc.springdemo.rest.web.controller;
 
-import com.tiket.tix.hotel.common.model.enums.ResponseCode;
 import dev.jspmarc.springdemo.entity.constant.ApiPath;
+import dev.jspmarc.springdemo.entity.constant.ResponseCode;
 import dev.jspmarc.springdemo.entity.constant.unit.test.GitHubTestVariable;
 import dev.jspmarc.springdemo.rest.web.model.response.GitHubUserResponse;
 import dev.jspmarc.springdemo.service.api.GitHubService;

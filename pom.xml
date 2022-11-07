@@ -77,6 +77,17 @@
       <scope>provided</scope>
     </dependency>
 
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>${springfox.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <version>${springfox.version}</version>
+    </dependency>
+
     <!--Test dependencies-->
     <dependency>
       <groupId>org.powermock</groupId>
@@ -122,5 +133,6 @@
     <maven.release.plugin>2.5.3</maven.release.plugin>
     <maven.deploy.plugin>2.8.2</maven.deploy.plugin>
     <maven.source.plugin>3.0.1</maven.source.plugin>
+    <springfox.version>2.7.0</springfox.version>
   </properties>
 </project>

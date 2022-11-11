@@ -13,6 +13,7 @@ public class TestController {
 
   @GetMapping()
   @ResponseStatus(code = HttpStatus.I_AM_A_TEAPOT)
-  public void test() {
+  public String test() {
+    return "Ich bin teekanne";
   }
 }

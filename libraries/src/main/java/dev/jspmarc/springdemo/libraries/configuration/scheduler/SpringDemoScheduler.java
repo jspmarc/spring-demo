@@ -18,6 +18,11 @@ public class SpringDemoScheduler {
     return get(schedulerGitHubConfiguration, "GitHub");
   }
 
+  @Bean
+  public Scheduler fibonacciScheduler(SchedulerFibonacciConfiguration schedulerFibonacciConfiguration) {
+    return get(schedulerFibonacciConfiguration, "Fibonacci");
+  }
+
   private Scheduler get(SchedulerConfiguration configuration, String prefix) {
     int minIdle =
             configuration.getMinIdleThread() != null ? configuration.getMinIdleThread() : 0;
